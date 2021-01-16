@@ -1,6 +1,6 @@
 import psycopg2
 from urllib.parse import urlparse
-from app.config import Config
+from config import Config
 
 
 if __name__ == "__main__":
