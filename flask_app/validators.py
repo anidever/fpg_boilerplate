@@ -1,10 +1,10 @@
 from marshmallow import fields, validate, ValidationError
-from flask_app import marshmallow
-from flask_app import models
+from flask_app import models, marshmallow
 
 
 class MockSchema(marshmallow.SQLAlchemySchema):
-    pass
+    class Meta:
+        model = models.MockModel
 
 
 class UserSchema(marshmallow.SQLAlchemySchema):
