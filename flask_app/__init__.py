@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_marshmallow import Marshmallow
 from config import DevelopmentConfig
 
 
@@ -18,6 +19,7 @@ def init_db(app):
 
 app = create_app()
 db, migrate = init_db(app)
+marshmallow = Marshmallow(app)
 
 # importing at the end the prevent circular import
 from flask_app import routes
