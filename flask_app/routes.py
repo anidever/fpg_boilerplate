@@ -7,7 +7,9 @@ from flask_app.validators import MockSchema, UserSchema
 
 @app.route('/', methods=['GET'])
 def hello_world():
-    return jsonify(hello="world")
+    body = request.get_json()
+    data = MockSchema().load(body)
+    return jsonify(hello="world"), HTTPStatus.OK
 
 
 @app.route("/register", methods=['POST'])
@@ -18,3 +20,10 @@ def register():
     db.session.add(user)
     db.session.commit()
     return jsonify('GREAT SUCCESS'), HTTPStatus.CREATED
+
+
+@app.route("/get_users", methods=['GET'])
+def get_users():
+    users = User.query.all()
+    user_dict = {idx: user.username for idx, user in enumerate(users)}
+    return jsonify(user_dict)
